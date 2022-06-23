@@ -1,36 +1,10 @@
 <head>
     <title>Meet the WebGL</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/3.4.2/gl-matrix.js" integrity="sha512-C36Mc3LuY9RCMgT8A3Z5i+5fYr1/9yVxODdw2LdSnhIgI6Pg3LmmgJL3df+KghqEouKxRBTPK9J+FTZMcdtbGw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/3.4.1/gl-matrix.js" integrity="sha512-7oogIEuYjEdB9P08VXSyYmGIk6ltV1xlhXey/p/kjYaduDRLCFaLLK5AJi2pQy08vBR1Vs0Irn0FTCTEb9VqAA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <canvas id="glcanvas" width="640" height="480">
         You're browser doesn't appear to support HTML5 <code>&lt;canvas&gt;</code> element.
     </canvas>
-    <script>        
-        function main(){
-            const canvas=document.querySelector("#glcanvas")
-            const gl = initWebGL(canvas);
-
-            gl.clearColor(0.0, 0.0, 0.0, 1.0);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-        }
-
-        function initWebGL(canvas){
-            let gl=null;
-
-            try {
-                gl=canvas.getContext('webgl')||canvas.getContext('experimental-webgl');
-            } catch (error) {
-                if(gl===null){
-                    alert("You're browser doesn't support WebGL");
-                    gl=null;
-                }
-            }
-            
-            return gl;
-        }
-
-
-        window.onload=main;
-    </script>
+    <script type="text/javascript" src="./gl.js" defer></script>
 </body>
