@@ -42,8 +42,19 @@ function main(){
     }
 
     const buffers = initBuffers(gl);
-    
-    drawScene(gl, programInfo, buffers);
+
+    let then = 0;
+
+    function render(now) {
+        now *= 0.001;
+        const deltaTime = now - then;
+        then = now;
+        
+        drawScene(gl, programInfo, buffers, deltaTime);
+
+        requestAnimationFrame(render);
+    }
+    requestAnimationFrame(render);
 }
 
 function initWebGL(canvas){
@@ -122,7 +133,8 @@ function initBuffers(gl){
     };
 }
 
-function drawScene(gl, programInfo, buffers) {
+let squareRotation = 0;
+function drawScene(gl, programInfo, buffers, deltaTime) {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
@@ -151,6 +163,13 @@ function drawScene(gl, programInfo, buffers) {
         modelViewMatrix,
         [0.0, 0.0, -6.0]
         );
+    squareRotation += Math.PI * deltaTime;
+    glMatrix.mat4.rotate(
+        modelViewMatrix,
+        modelViewMatrix,
+        squareRotation, 
+        [0, 0, 1] 
+    )
     
     {
         const numComponents = 2;
@@ -208,4 +227,13 @@ function drawScene(gl, programInfo, buffers) {
         const vertexCount = 4;
         gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
     }
+}
+
+let then = 0;
+function render(now) {
+    now *= 0.001;
+    const deltaTime = now - then;
+    then = now;
+
+    drawScene(gl, )
 }
